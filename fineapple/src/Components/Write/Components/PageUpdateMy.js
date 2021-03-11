@@ -70,7 +70,7 @@ function PageUpdateMy({ handleWriteData, history }) {
 
   useEffect(() => {
     axios
-      .post("https://localhost:3000/myPage", {
+      .post("https://localhost:5000/myPage", {
         email: "email@email.com",
       })
       .then((res) => {
@@ -126,19 +126,13 @@ function PageUpdateMy({ handleWriteData, history }) {
       email: "email@email.com",
       nickname: nickName,
       ContactTime: contactTime,
-      trade: trade, //trade 로 수정예정
+      descrition: trade, //trade 로 수정예정
       location: coords.region,
       Entrepreneur: Entrepreneur,
     };
-    console.log(updateObj);
-
     axios
-      .put("https://localhost:3000/myPage/update", updateObj)
-      .then((res) => {
-        console.log("ok");
-        history.push("/mypage");
-      })
-      .catch((err) => console.log(err));
+      .put("https://localhost:5000/mypage/update", updateObj)
+      .then((res) => history.push("/mypage"));
   };
 
   return (

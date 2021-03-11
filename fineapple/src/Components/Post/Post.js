@@ -40,7 +40,7 @@ const Post = ({ match }) => {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:3000/postPage/${match.params.id}`)
+      .get(`https://localhost:5000/postPage/${match.params.id}`)
       .then((res) => {
         console.log(res.data.find_feedid);
         setPostData(res.data.find_feedid);
