@@ -35,9 +35,10 @@ const Listitem = (props) => {
             <Avatar className='card__top__left__img' style={{ height: "70px", width: "70px" }} src={Profile} />
           </div>
           <div className="listitem__list__top__left">
-            <h4>emily youn</h4>
-            <h3> javascript 알려드릴게요 공방 1:1 들어오세요 오늘 한시까지 합니다. </h3>
-            <p>1.4km 이내</p>
+
+            <p>1.4km 이내  <span>·</span> 시급 {cost}원 </p>  
+            <h3>{title} </h3>
+            <h4>{nickname}</h4>
           </div>
         </div>
         <div className="listitem__list__middle">

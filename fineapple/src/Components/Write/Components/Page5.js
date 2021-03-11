@@ -2,10 +2,25 @@ import React from "react";
 import axios from "axios";
 import Next from "./BtnNext";
 import Prev from "./BtnPrev";
-import { Link } from "react-router-dom";
-import "./Page5.css";
 
-function WorkReview({ writeData, handlecomplete }) {
+import { Link, withRouter } from "react-router-dom";
+import ReactS3 from "react-s3";
+
+import "./Page5.css";
+import { useAuth0 } from "@auth0/auth0-react";
+
+
+function WorkReview({ writeData, handlecomplete, history }) {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const config = {
+    bucketName: process.env.REACT_APP_BUCKETNAME,
+    dirName: process.env.REACT_APP_DIRNAME,
+    region: process.env.REACT_APP_REGION,
+    accessKeyId: process.env.REACT_APP_ACCESSKEYID,
+    secretAccessKey: process.env.REACT_APP_SECRETACCESSKEY,
+  };
+  console.log(user, isAuthenticated);
+
   const addCommas = (num) => {
     if (num) {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -35,8 +50,9 @@ function WorkReview({ writeData, handlecomplete }) {
     handlecomplete();
 
     let submitObj = {
-      // email: "email@email.com",
-      userid: "1",
+
+      email: user.email,
+
       group_category: data.type,
       profileimage: "profileimage",
       title: data.title,
