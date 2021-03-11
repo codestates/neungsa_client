@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import Next from "./BtnNext";
 import Prev from "./BtnPrev";
+
 import { Link, withRouter } from "react-router-dom";
 import ReactS3 from "react-s3";
+
 import "./Page5.css";
 import { useAuth0 } from "@auth0/auth0-react";
+
 
 function WorkReview({ writeData, handlecomplete, history }) {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -17,6 +20,7 @@ function WorkReview({ writeData, handlecomplete, history }) {
     secretAccessKey: process.env.REACT_APP_SECRETACCESSKEY,
   };
   console.log(user, isAuthenticated);
+
   const addCommas = (num) => {
     if (num) {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -24,54 +28,62 @@ function WorkReview({ writeData, handlecomplete, history }) {
     return;
   };
 
-  async function uploadS3(uploadS3Files) {
-    let s3Objects = [];
-
-    for (let file of uploadS3Files) {
-      await ReactS3.uploadFile(file, config).then((data) => {
-        console.log(1);
-        s3Objects.push(data.location);
-      });
+  const handleSubmit = (data) => {
+    console.log("ok", data.toForm);
+    const formData = new FormData();
+    if (data.toForm) {
+      data.toForm.forEach((el) => formData.append("image", el));
+      axios(
+        {
+          method: "post",
+          url: "https://localhost:5000/uploadFiles",
+          data: { formData: formData },
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
     }
 
-    return s3Objects;
-  }
-
-  async function handleSubmit(data) {
-    const uploadS3Files = data.toForm;
-    let s3;
-    if (uploadS3Files) {
-      s3 = await uploadS3(uploadS3Files);
-    }
+    handlecomplete();
 
     let submitObj = {
+
       email: user.email,
+
       group_category: data.type,
       profileimage: "profileimage",
       title: data.title,
       category: "data.category",
       tag: data.tags,
       content: data.content,
-      images: s3 || [],
+      images: data.file,
       location: data.region,
       latitude: data.lat,
       longitude: data.lon,
       serviceId: "12312",
       chatroom: "123123",
       cost: data.cost,
+      form: formData,
     };
+    console.log(submitObj);
 
-    axios({
-      method: "post",
-      url: "https://localhost:3000/write/friend",
-      data: submitObj,
-    })
-      .then((res) => console.log("2", res))
-      .catch((err) => console.log(err));
-
-    handlecomplete();
-    history.push("/feed");
-  }
+    axios(
+      {
+        method: "post",
+        url: "https://localhost:5000/write/friend",
+        data: submitObj,
+      },
+      {
+        headers: {
+          "x-device-id": "stuff",
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    ).then((res) => console.log("ok", res));
+  };
 
   const renderPhotos = (photos) => {
     if (photos) {
@@ -149,9 +161,13 @@ function WorkReview({ writeData, handlecomplete, history }) {
             <Link className="writePage" to="/write/4">
               <Prev />
             </Link>
-            <div className="writePage" onClick={() => handleSubmit(writeData)}>
+            <Link
+              className="writePage"
+              to="/Login"
+              onClick={() => handleSubmit(writeData)}
+            >
               <Next />
-            </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -159,4 +175,4 @@ function WorkReview({ writeData, handlecomplete, history }) {
   );
 }
 
-export default withRouter(WorkReview);
+export default WorkReview;

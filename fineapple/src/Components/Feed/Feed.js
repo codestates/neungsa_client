@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
-import { Link } from "react-router-dom";
 import "./Feed.css";
 import Card from "./Card";
 import Listitem from "./Listitem";
@@ -12,6 +11,7 @@ import face2 from "../../img/mockup/face2.jpg";
 import FeedSideBar from "./FeedSideBar";
 import Profile from "../../img/mockup/profile.png";
 import { Avatar } from "@material-ui/core";
+
 import axios from "axios";
 
 
@@ -62,10 +62,18 @@ function Feed({ handleFeedData }) {
 
 
 
+  const handleSlideBtn = () => {
+    console.log("ok");
+    setSlideData((prev) => (prev === Profile ? face2 : face1));
+  };
+
   return (
     <div className="feed">
+      <div className="feed__container__header">
+        <h2>우리동네 소능력자</h2>
+      </div>
 
-      {/* <div className="feed_cards">
+      <div className="feed_cards">
         <Card data={slideData} className="single__card" />
         <Card data={slideData} className="single__card" />
         <Card data={slideData} className="single__card" />
@@ -73,15 +81,24 @@ function Feed({ handleFeedData }) {
         <PlayArrowIcon
           className="feed__cards__next"
           onClick={handleSlideBtn}
-        
+          // style={{
+          //   color: "white",
+          //   backgroundColor: "a2b493",
+          //   width: "50px",
+          //   height: "50px",
+          //   position: "relative",
+          //   right: "4%",
+          // }}
         />
-      </div> */}
+      </div>
       <div className="feed_container">
+
         <FeedSideBar setCategory={setSelectedCategory} setCost={setCost} setGroup={ setSelectedGroup }/>
+
         <div className="feed__wrapper">
           <div className="feed__wrapper__header">
-
             <h2>일산 3동에는 이런일이 있어요!</h2>
+
 
 
             <div className="feed__wrapper__top__container">
@@ -97,23 +114,30 @@ function Feed({ handleFeedData }) {
               <Link to="/write/1" className="feed__btn__write" >
                 글 작성
             </Link>
+
             </div>
           </div>
 
-
-          
-          <div className="feed_posts">
-            {filtredFeeds.map(feed => (
-            <Link className="writePage" key={feed.id} to={`/feed/${feed.id}`}>
-                <Listitem feed={feed}/>
+          <ul className="feed_posts">
+            <div>
+              <Link className="writePage" to="/feed/72">
+                <Listitem data={slideData} />
               </Link>
-            ))}
-              
+              <Link className="writePage" to="/feed/71">
+                <Listitem data={slideData} />
+              </Link>
+              <Link className="writePage" to="/feed/69">
+                <Listitem data={slideData} />
+              </Link>
+              <Link className="writePage" to="/feed/67">
+                <Listitem data={slideData} />
+              </Link>
               <div className="see__more__container">더보기</div>
             </div>
+          </ul>
         </div>
       </div>
-      <Advertise  />
+      <Advertise />
       <Footer />
     </div>
   );

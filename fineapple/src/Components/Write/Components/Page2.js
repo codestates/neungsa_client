@@ -41,28 +41,14 @@ function WorkTitle({ handleWriteData }) {
             }
           )
           .then((address) => {
-            const last = address.data.documents[1].region_1depth_name.slice(-1);
-            if (last === "도") {
-              let locationName = address.data.documents[1].region_2depth_name;
-              setLocationInput(locationName);
-              setCoords({
-                lat: lat,
-                lon: lon,
-                region: locationName,
-              });
-            } else {
-              let regionName =
-                address.data.documents[1].region_1depth_name +
-                " " +
-                address.data.documents[1].region_2depth_name;
-              let locationName = regionName;
-              setLocationInput(locationName);
-              setCoords({
-                lat: lat,
-                lon: lon,
-                region: locationName,
-              });
-            }
+            let locationName = address.data.documents[1].region_2depth_name;
+            // console.log(locationName);
+            setLocationInput(locationName);
+            setCoords({
+              lat: lat,
+              lon: lon,
+              region: locationName,
+            });
           });
       },
       () => {

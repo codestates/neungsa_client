@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../img/logo_main.png";
 import "./Header.css";
-import { useAuth0 } from "@auth0/auth0-react";
 
 function Header({ handleLogin, Login }) {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
+
   const { loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
+
 
   return (
     <div className="header">
@@ -18,6 +19,7 @@ function Header({ handleLogin, Login }) {
           <img src={Logo} alt="Fineapple logo" />
         </Link>
         <ul className="list">
+
           {!isAuthenticated ? (
             <li className="header__item">
               <div
@@ -38,12 +40,14 @@ function Header({ handleLogin, Login }) {
             </li>
           )}
 
+
           <li className="header__item">
             <Link to="/feed" className="header__links" onClick={handleClick}>
               피드
             </Link>
           </li>
           <li className="header__item">
+
             {!isAuthenticated ? (
               <Link
                 to="/theteam"
@@ -61,6 +65,7 @@ function Header({ handleLogin, Login }) {
                 마이페이지
               </Link>
             )}
+
           </li>
         </ul>
       </div>
