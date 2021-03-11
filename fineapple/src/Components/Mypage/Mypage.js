@@ -26,7 +26,7 @@ const Mypage = (props) => {
 
   useEffect(() => {
     axios
-      .post("https://localhost:3000/myPage", {
+      .post("https://localhost:5000/myPage", {
         email: "email@email.com",
       })
       .then((res) => {
