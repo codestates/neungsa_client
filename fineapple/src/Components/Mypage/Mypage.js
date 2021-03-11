@@ -28,8 +28,10 @@ const Mypage = (props) => {
 
   useEffect(() => {
     axios
+
       .post("https://localhost:3000/myPage", {
         email: user.email,
+
       })
       .then((res) => {
         let filterData = res.data.find_feed.slice(-5);

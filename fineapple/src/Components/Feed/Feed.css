@@ -9,7 +9,6 @@ li {
 
 /* <Feed>component */
 .feed_container {
-  padding-top: 50px;
   background: #f1f2f4;
   display: flex;
   justify-content: center;
@@ -27,10 +26,11 @@ li {
 
 .feed__container__header > h2 {
   font-size: 25px;
+  margin: 20px 0px;
 }
 
 .feed__wrapper {
-  flex: 0.57;
+  flex: 0.7;
   flex-direction: column;
   justify-content: center;
   display: flex;
@@ -55,77 +55,36 @@ li {
 .feed__wrapper__header {
   border-bottom: 1px solid #d1d1d1;
   display: flex;
-  flex-direction: column;
-  justify-items: center;
-
+  justify-content: space-around;
 }
 .feed__wrapper__search {
   display: flex;
-
 }
 
 .feed__wrapper__header > h2 {
   margin-top: 25px;
-  padding-left: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #d1d1d1;
-  position: relative;
 }
 
-
-.feed__wrapper__search__input {
-
-  border: 1px solid #d1d1d1;
-  line-height: 1.42857;
-  border-radius: 5px 0px 0px 5px;
-  font-size: 14px;
-  border-right: none;
+.feed__wrapper__search {
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-bottom: 10px;
   padding: 10px 15px;
-  width: 600px;
-  text-align: start;
 }
-.feed__wrapper__top__container {
-  display: flex;
-  /* justify-content: space-between; */
-  margin: 10px 0px 20px 20px;
-
-
-}
-
-.feed__btn__write {
-  margin-left: 20px;
-  text-decoration: none;
-  color: white;
-  text-align: center;
-  padding: 10px 20px;
-  border-radius: 5px;
-  background: #8ab77b;
-}
-
-.feed__btn__write:hover {
-  background: #6aa058;
-}
-
-
-.feed__wrapper__search__input:focus {
-  outline: none;
-}
-
-.feed__wrapper__search__input:hover {
-  background-color: #f1f1f16b;
+.feed__wrapper__search__input {
+  padding: 10px 15px;
+  line-height: 1.42857;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px 0px 0px 5px;
+  width: 80%;
+  font-size: 13px;
 }
 
 .feed__wrapper__search__btn {
   padding: 10px 15px;
   background-color: rgb(251, 216, 110);
-  border: 1.5px solid rgb(251, 216, 110);
   border-radius: 0px 5px 5px 0px;
   color: white;
-  cursor: pointer;
-}
-
-.feed__wrapper__search__btn:hover {
-  background-color: rgb(248, 208, 89);
 }
 
 /* <Card>Component */
@@ -228,6 +187,19 @@ li {
   flex-wrap: wrap;
 }
 
+.card__bottom__tags__single {
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 15px;
+  color: rgb(167, 167, 167);
+  font-weight: 500;
+  background-color: #e4e4e4;
+  padding: 5px 10px;
+  margin-top: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+}
 
 .card__bottom__btn {
   background-color: #8ab77b;
@@ -274,7 +246,6 @@ li {
 .feed_tag_box {
   display: flex;
   flex-wrap: wrap;
-  margin-top: -30px;
 }
 .feed_tag_box > span {
   margin: 2px;
@@ -306,12 +277,14 @@ li {
   color: rgb(66, 65, 65);
 }
 .list_card_left img {
+  width: 50px;
+  height: 60px;
   object-fit: fill;
   border-radius: 50%;
 }
 .list_card_tag_box {
   /* border: 1px solid black; */
-  margin-top: -15px;
+  margin-top: 5px;
   display: flex;
   /* width: 170px; */
   flex-wrap: wrap;
@@ -319,22 +292,13 @@ li {
 .list_card_tag_box p {
   margin-right: 10px;
   border-radius: 15px;
+  color: rgb(255, 255, 255);
   font-weight: 500;
+  background-color: rgb(110, 166, 251);
   padding: 5px 10px;
   margin-top: 10px;
   cursor: pointer;
   text-align: center;
-
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  margin-right: 5px;
-
-  background-color: #f1f1f1;
-}
-
-.list_card_tag_box p:hover {
-  background-color: #dadada;
 }
 
 .list_card_right {
@@ -402,16 +366,13 @@ li {
   transform: rotateZ(180deg);
 }
 /* 구조연습? */
-
+.feed_posts {
+  display: flex;
+}
 
 .see__more__container {
   text-align: center;
-  padding: 10px 0 10px 0;
+  margin: 10px 0 10px 0;
   font-weight: 700;
   cursor: pointer;
 }
-
-.see__more__container:hover {
-  background-color: #f1f1f1;
-}
-

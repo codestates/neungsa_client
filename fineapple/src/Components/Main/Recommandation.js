@@ -31,7 +31,7 @@ function Recommandation({ location }) {
     <div className="recommandation">
       <div className="text__container">
         <h1 className="rec__header">
-          {location ? location : "파인애플"} 에는 이런 일들이 있어요!
+          {location ? location : "역삼1동"} 에는 이런 일들이 있어요!
         </h1>
       </div>
       <div className="slides__container">
