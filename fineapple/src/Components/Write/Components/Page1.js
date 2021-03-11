@@ -23,18 +23,18 @@ function GettingStarted({ handleWriteData }) {
           <div className="choice__row">
             <div
               className={
-                select === "lesson" ? "choice__work select" : "choice__work"
+                select === "레슨 찾기" ? "choice__work select" : "choice__work"
               }
-              onClick={() => handleSelect("lesson")}
+              onClick={() => handleSelect("레슨 찾기")}
             >
               <WorkIcon className="icon" />
               <h3 className="choice__desc">레슨 구하기</h3>
             </div>
             <div
               className={
-                select === "friend" ? "choice__work select" : "choice__work"
+                select === "친구 구하기" ? "choice__work select" : "choice__work"
               }
-              onClick={() => handleSelect("friend")}
+              onClick={() => handleSelect("친구 구하기")}
             >
               <GroupIcon className="icon" />
               <h3 className="choice__desc">친구 구하기</h3>

@@ -11,10 +11,56 @@ import face2 from "../../img/mockup/face2.jpg";
 import FeedSideBar from "./FeedSideBar";
 import Profile from "../../img/mockup/profile.png";
 import { Avatar } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
-const Feed = () => {
-  const [slideData, setSlideData] = useState(face1);
+import axios from "axios";
+
+
+
+
+function Feed({ handleFeedData }) {
+  //feed is array and initally needs to put empty array
+  const inputRef = useRef(null)
+  const [feeds, setFeeds] = useState([]);
+  const [filtredFeeds, setFiltredFeeds] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [cost, setCost] = useState(null);
+  const [selectedGroup, setSelectedGroup] = useState(null);
+  
+  useEffect(function () {
+    let data = feeds;
+    if (inputValue) {
+      data = data.filter(item => item.title.includes(inputValue) ||item.content.includes(inputValue) )
+    }
+
+    if (cost) {
+      data = data.filter(item => item.cost <= cost)
+    }
+
+    setFiltredFeeds(data);
+  }, [feeds, cost, inputValue]);
+
+  useEffect(function () {
+    const query = selectedCategory ? `?category=${selectedCategory}` : '';
+    axios.get(`https://localhost:3000/feedpage${query}`)
+      .then((response) => {
+        setFeeds(response.data.find_feed)
+        
+      })
+    
+  }, [selectedCategory]);
+
+  useEffect(function () {
+    const queryGroup = selectedGroup ? `?group_category=${selectedGroup}` : '';
+    axios.get(`https://localhost:3000/feedpage${queryGroup}`)
+      .then((response) => {
+        setFeeds(response.data.find_feed)
+        
+      })
+    
+  }, [selectedGroup]);
+
+
 
   const handleSlideBtn = () => {
     console.log("ok");
@@ -46,17 +92,29 @@ const Feed = () => {
         />
       </div>
       <div className="feed_container">
-        <FeedSideBar />
+
+        <FeedSideBar setCategory={setSelectedCategory} setCost={setCost} setGroup={ setSelectedGroup }/>
+
         <div className="feed__wrapper">
           <div className="feed__wrapper__header">
             <h2>일산 3동에는 이런일이 있어요!</h2>
-            <div className="feed__wrapper__search">
-              <input
-                type="text"
-                placeholder="검색하기"
-                className="feed__wrapper__search__input"
-              />
-              <div className="feed__wrapper__search__btn">search</div>
+
+
+
+            <div className="feed__wrapper__top__container">
+              <div className="feed__wrapper__search">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  placeholder="e.g. 딸기농장 일손구함"
+                  className="feed__wrapper__search__input"
+                />
+                <div onClick={() => setInputValue(inputRef.current.value)} className="feed__wrapper__search__btn">검색</div>
+              </div>
+              <Link to="/write/1" className="feed__btn__write" >
+                글 작성
+            </Link>
+
             </div>
           </div>
 
