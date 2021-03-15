@@ -49,7 +49,7 @@ const MapContents = ({ handleMap }) => {
               `https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${lon}&y=${lat}`,
               {
                 headers: {
-                  Authorization: "KakaoAK ede32a5902568ca38d7da12deead44af",
+                  Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_AK}`,
                 },
               }
             )

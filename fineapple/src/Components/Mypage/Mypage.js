@@ -31,11 +31,11 @@ const Mypage = (props) => {
   };
   const deleteProfile = () => {
     axios
-      .post("https://localhost:3000/myPagedelete", {
+      .post("https://fineapple.kr/myPagedelete", {
         email: user.email,
       })
       .then((res) => {
-        logout({ returnTo: "https://localhost:8000" });
+        logout({ returnTo: "https://fineaple.com" });
         props.history.push("/");
       });
     openModal();
@@ -46,7 +46,7 @@ const Mypage = (props) => {
   useEffect(() => {
     if (isAuthenticated) {
       axios
-        .post("https://localhost:3000/myPage", {
+        .post("https://fineapple.kr/myPage", {
           email: user.email,
         })
         .then((res) => {
@@ -66,7 +66,9 @@ const Mypage = (props) => {
             <button className="close-modal" onClick={openModal}></button>
             <div className="modal_text_container">
               <h2 className="delete_account">잠시만요! 🤔</h2>
-              <div>정말로 삭제하시겠어요? 글목록 및 이용내역이 사라집니다. </div>
+              <div>
+                정말로 삭제하시겠어요? 글목록 및 이용내역이 사라집니다.{" "}
+              </div>
               <button onClick={deleteProfile}>확인</button>
             </div>
           </div>
@@ -76,7 +78,11 @@ const Mypage = (props) => {
             <img src={user.picture ? user.picture : face1} alt="" />
             <div>
               <div className="mypage_profile_name">{myData.nickname}</div>
-              <div className="mypage_location"> <LocationOnOutlinedIcon className="mypage_location_emoji" /><p>{myData.location}</p></div>
+              <div className="mypage_location">
+                {" "}
+                <LocationOnOutlinedIcon className="mypage_location_emoji" />
+                <p>{myData.location}</p>
+              </div>
               {/* <span className="mypage_profile_good">누적 좋아요👌 : 800</span> */}
               {yourSelf ? (
                 <div>

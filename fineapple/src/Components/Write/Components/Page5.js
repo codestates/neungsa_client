@@ -81,7 +81,7 @@ function WorkReview({ writeData, handlecomplete, history }) {
       };
       axios({
         method: "post",
-        url: "https://localhost:3000/write/friend",
+        url: "https://fineapple.kr/write/friend",
         data: submitObj,
       })
         .then((res) => {})
