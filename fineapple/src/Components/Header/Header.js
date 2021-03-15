@@ -46,7 +46,7 @@ function Header({ handleLogin, Login }) {
         </Link>
         <ul className="list">
           <li className="header__item">
-            <Link to="/feed" onClick={() => window.location.href="/feed"} className="header__links" >
+            <Link to="/feed" onClick={handleClick} className="header__links" >
               글 목록
             </Link>
           </li>
