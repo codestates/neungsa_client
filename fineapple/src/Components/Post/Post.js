@@ -41,10 +41,11 @@ const Post = ({ match, history }) => {
   const [postEmail, setPostEmail] = useState("");
   const [writerData, setwriterData] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
+  const [sendMessage, setSendMessage] = useState(true);
 
   const deletePost = () => {
     axios
-      .post("https://localhost:3000/postPagedelete", {
+      .post("https://fineapple.kr/postPagedelete", {
         email: user.email,
         feedid: match.params.id,
       })
@@ -68,7 +69,7 @@ const Post = ({ match, history }) => {
     if (where === "content") {
       console.log(user.email, inputContent.content);
       axios
-        .post("https://localhost:3000/postPagecontentmodify", {
+        .post("https://fineapple.kr/postPagecontentmodify", {
           email: user.email,
           content: inputContent.content,
           feedid: match.params.id,
@@ -79,7 +80,7 @@ const Post = ({ match, history }) => {
     } else if (where === "title") {
       console.log(user.email, inputTitle);
       axios
-        .post("https://localhost:3000/postPagetitlemodify", {
+        .post("https://fineapple.kr/postPagetitlemodify", {
           email: user.email,
           title: inputTitle,
           feedid: match.params.id,
@@ -91,7 +92,7 @@ const Post = ({ match, history }) => {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:3000/postPage/${match.params.id}`)
+      .get(`https://fineapple.kr/postPage/${match.params.id}`)
       .then((res) => {
         setwriterData(res.data.feed_postuser);
         let data = res.data.find_feedid;
@@ -120,8 +121,10 @@ const Post = ({ match, history }) => {
         <div className="modal">
           <button className="close-modal" onClick={openModal}></button>
           <div className="modal_text_container">
-          <h2 className="delete_account">잠시만요! 🤔</h2>
-            <div>정말로 삭제하시겠어요? 한번 삭제된 글은 복구되지 않습니다.</div>
+            <h2 className="delete_account">잠시만요! 🤔</h2>
+            <div>
+              정말로 삭제하시겠어요? 한번 삭제된 글은 복구되지 않습니다.
+            </div>
             <button onClick={deletePost}>삭제</button>
           </div>
         </div>
@@ -155,7 +158,10 @@ const Post = ({ match, history }) => {
                       >
                         수정
                       </button>
-                      <button className="edit_btn_delete" onClick={() => openModal()}>
+                      <button
+                        className="edit_btn_delete"
+                        onClick={() => openModal()}
+                      >
                         글 삭제
                       </button>
                     </div>
@@ -268,7 +274,7 @@ const Post = ({ match, history }) => {
             </div>
 
             {!editContent ? (
-              <p className="post__p" >{inputContent.content}</p>
+              <p className="post__p">{inputContent.content}</p>
             ) : (
               <textarea
                 value={inputContent.content}
@@ -280,7 +286,9 @@ const Post = ({ match, history }) => {
 
             <h2 className="post__price">비용</h2>
             {!editContent ? (
-              <p className="post__p" >{`${!inputContent.cost ? "0" : inputContent.cost}원 / 시간당`}</p>
+              <p className="post__p">{`${
+                !inputContent.cost ? "0" : inputContent.cost
+              }원 / 시간당`}</p>
             ) : (
               <input
                 type="text"
@@ -291,7 +299,9 @@ const Post = ({ match, history }) => {
               />
             )}
 
-            <h2 ref={refImage} className="post__price">사진 및 동영상</h2>
+            <h2 ref={refImage} className="post__price">
+              사진 및 동영상
+            </h2>
             <div className="post_img_container">
               {postData.images &&
                 postData.images.split(",").map((photo) => {
@@ -311,22 +321,22 @@ const Post = ({ match, history }) => {
           </div>
         </div>
         <div className="message_side">
-          {yourself ? (
+          {yourself && sendMessage ? (
             ""
           ) : (
             <div className="for_message_box">
               작성자에게 메시지를 보내보세요
               <Button
                 onClick={() => {
-                  console.log("chat send Click");
-                  console.log(user.email, match.params.id);
+                  // console.log("chat send Click");
+                  // console.log(user.email, match.params.id);
                   if (user && user.email) {
                     axios
-                      .post("https://localhost:3000/chatroom", {
+                      .post("https://fineapple.kr/chatroom", {
                         email: user.email,
                         feedid: match.params.id,
                       })
-                      .then((res) => console.log("chat", res));
+                      .then((res) => setSendMessage(false));
                   } else {
                     alert("login이후 이용가능합니다.");
                   }

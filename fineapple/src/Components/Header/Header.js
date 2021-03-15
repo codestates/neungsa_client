@@ -46,7 +46,11 @@ function Header({ handleLogin, Login }) {
         </Link>
         <ul className="list">
           <li className="header__item">
-            <Link to="/feed" onClick={() => window.location.href="/feed"} className="header__links" >
+            <Link
+              to="/feed"
+              onClick={() => (window.location.href = "/feed")}
+              className="header__links"
+            >
               글 목록
             </Link>
           </li>
@@ -71,7 +75,7 @@ function Header({ handleLogin, Login }) {
             <li className="header__item">
               <div
                 className="header__links"
-                onClick={() => logout({ returnTo: "https://localhost:8000" })}
+                onClick={() => logout({ returnTo: "https://fineaple.com" })}
               >
                 로그아웃
               </div>

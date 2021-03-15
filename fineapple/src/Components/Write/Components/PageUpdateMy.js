@@ -75,7 +75,7 @@ function PageUpdateMy({ handleWriteData, history }) {
   useEffect(() => {
     if (isAuthenticated) {
       axios
-        .post("https://localhost:3000/myPage", {
+        .post("https://fineapple.kr/myPage", {
           email: user.email,
         })
         .then((res) => {
@@ -160,7 +160,7 @@ function PageUpdateMy({ handleWriteData, history }) {
     // console.log(updateObj);
 
     axios
-      .put("https://localhost:3000/myPage/update", updateObj)
+      .put("https://fineapple.kr/myPage/update", updateObj)
       .then((res) => {
         // console.log("ok");
         history.push("/mypage");
@@ -170,7 +170,7 @@ function PageUpdateMy({ handleWriteData, history }) {
 
   const corfirmNickName = () => {
     axios
-      .post("https://localhost:3000/myPage/nickname", {
+      .post("https://fineapple.kr/myPage/nickname", {
         email: user.email,
         nickname: nickName,
       })
@@ -274,8 +274,8 @@ function PageUpdateMy({ handleWriteData, history }) {
                 <div className="job__hashtag__container">
                   <h3 className="job__hashtag__title">분야 및 자격증</h3>
                   <p>
-                    하는 일을 가장 잘 설명해주는 단어나 관련된 자격증을 입력해 주세요.
-                    태그는 쉼표 ( , ) 단위로 구별됩니다.{" "}
+                    하는 일을 가장 잘 설명해주는 단어나 관련된 자격증을 입력해
+                    주세요. 태그는 쉼표 ( , ) 단위로 구별됩니다.{" "}
                   </p>
                   {/* <input className="job__hashtag__inputbox" placeholder="e.g. 영상 디자인" type="text" autoComplete="none" /> */}
                   <div className="job__hashtag__inputbox_">

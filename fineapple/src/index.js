@@ -9,7 +9,7 @@ ReactDOM.render(
     <Auth0Provider
       domain="dev-t-9bacl6.jp.auth0.com"
       clientId="3N8IjCCCWw1rpKsqBja872PitnJ61gQJ"
-      redirectUri="https://localhost:8000"
+      redirectUri="https://fineaple.com"
       useRefreshTokens={true}
       cacheLocation="localstorage"
     >
